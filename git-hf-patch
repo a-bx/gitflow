@@ -292,11 +292,10 @@ EOS
     echo
     echo "Summary of actions:"
     echo "- The branch '$BRANCH' was pushed to '$ORIGIN'"
-    echo "- A Pull Request from '$BRANCH' to '$BASE' was created at '$PR_URL'"
     echo ""
     echo "Once the Pull Request has been accepted, cleanup the patch with:"
     echo ""
-    echo "     git hf patch finish $NAME"
+    echo "     git hf patch finish $NAME <hotfix version>"
     echo
 }
 
