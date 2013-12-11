@@ -295,6 +295,7 @@ cmd_default() {
 	   ! git config --get hubflow.prefix.feature >/dev/null 2>&1 ||
 	   ! git config --get hubflow.prefix.release >/dev/null 2>&1 ||
 	   ! git config --get hubflow.prefix.hotfix >/dev/null 2>&1 ||
+	   ! git config --get hubflow.prefix.patch >/dev/null 2>&1 ||
 	   ! git config --get hubflow.prefix.support >/dev/null 2>&1 ||
 	   ! git config --get hubflow.prefix.versiontag >/dev/null 2>&1; then
 		echo
@@ -314,6 +315,19 @@ cmd_default() {
 		fi
 		[ "$answer" = "-" ] && prefix= || prefix=${answer:-$default_suggestion}
 		git config hubflow.prefix.feature "$prefix"
+	fi
+
+	# Patch branches
+	if ! git config --get hubflow.prefix.patch >/dev/null 2>&1 || flag force; then
+		default_suggestion=$(git config --get hubflow.prefix.patch || echo patch/)
+		printf "Patch branches? [$default_suggestion] "
+		if flag ask; then
+			read answer
+		else
+			printf "\n"
+		fi
+		[ "$answer" = "-" ] && prefix= || prefix=${answer:-$default_suggestion}
+		git config hubflow.prefix.patch "$prefix"
 	fi
 
 	# Release branches
